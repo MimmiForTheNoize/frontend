@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "id": "2",
+      "timestamp": "134578765432",
+      "temperature": "5",
+      "humidity": "19",
+      "showData": false
+    },
+    {
+      "timestamp": 1636055959856,
+      "temperature": "5",
+      "humidity": "23",
+      "showData": false,
+      "id": "qXPqBuL"
+    }
+  ]
+}
