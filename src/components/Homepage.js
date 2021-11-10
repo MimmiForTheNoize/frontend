@@ -3,7 +3,7 @@ import AddData from "./AddData";
 import Data from "./Data";
 import * as React from "react";
 import {useEffect, useState} from "react";
-
+import Selection from "./Selection";
 
 const Homepage = () => {
     const [showAddData, setShowAddData] = useState
@@ -87,10 +87,11 @@ const Homepage = () => {
             <Header onAdd={() =>setShowAddData
             (!showAddData)}
                     showAdd={showAddData} />
+            {data.length > 0 ? <Selection /> : <p>Nothing to selection</p>}
             {showAddData && <AddData onAdd={addData} />}
             {data.length > 0 ?
                 <Data data={data} onDelete={deleteData}
-                      onToggle={toggleData} onUpdate={updateData()}/>
+                                     onToggle={toggleData} onUpdate={updateData()}/>
                 : <h3>'No Data available'</h3>}
         </div>
     )

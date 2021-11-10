@@ -9,18 +9,20 @@ import {Table} from "./components/Table";
 
 
 const App = () => {
-  return (
-      <Router>
-        <Navigation />
-        <div className="container">
-          <Routes>
-            <Route path='/' element={<Homepage />}/>
-          </Routes>
-        </div>
-        <Footer />
-      </Router>
+        return (
+            <Router>
+                <Navigation />
+            <div className="container">
+                    <Routes>
+                    <Route path='/' element={<Homepage />}/>
+                    <Route exact path='/about' element={<About />} />
+                    <Route exact path='/table' element={<Table />} />
+                    </Routes>
+            </div>
+                <Footer />
+            </Router>
 
-  );
+        );
 }
 
 export default App

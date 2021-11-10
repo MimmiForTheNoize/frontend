@@ -26,33 +26,33 @@ const Datastream = ({datastream, onDelete, onToggle, onUpdate}) => {
         }
      */
 
-    return (
+return (
 
-        <div className={`col s12 red lighten-4 datastream_div ${datastream.showData ? 'showData' : ''}`}
-             onDoubleClick={() =>
-                 onToggle(datastream.id)}>
-            <h4>
-                <div><FaTimes style={{color: 'red', cursor: 'pointer'}}
-                              onClick={() => {
-                                  if (window.confirm('Are you sure you want to delete sensor?')) {
-                                      onDelete(datastream.id)
-                                  };
-                              }}
-                />
-                </div>
-                <div>
-                    <UpdateBtn className={'updateBtn'}  text='update' onClick={onUpdate}/>
-                    <button className={'waves-effect waves-light btn-large right showMoreBtn'}
-                            onClick={() => onUpdate(datastream.id)}>ShowMore
-                    </button>
-                </div>
-            </h4>
-            <h4>{"temperature: " + datastream.temperature}
-            </h4>
-            <p>Time of recording: <b>{datastream.timestamp ? timeStr : 'no timeslot available'}</b></p>
-            <span>{datastream.showData === true ? 'humidity: ' + datastream.humidity : ''}</span>
-        </div>
-    )
+    <div className={`col s12 red lighten-4 datastream_div ${datastream.showData ? 'showData' : ''}`}
+         onDoubleClick={() =>
+             onToggle(datastream.id)}>
+        <h4>
+            <div><FaTimes style={{color: 'red', cursor: 'pointer'}}
+                          onClick={() => {
+                              if (window.confirm('Are you sure you want to delete sensor?')) {
+                                  onDelete(datastream.id)
+                              };
+                          }}
+            />
+            </div>
+            <div>
+                <UpdateBtn className={'updateBtn'}  text='update' onClick={onUpdate}/>
+                <button className={'waves-effect waves-light btn-large right showMoreBtn'}
+                        onClick={() => onUpdate(datastream.id)}>ShowMore
+                </button>
+            </div>
+        </h4>
+        <h4>{"temperature: " + datastream.temperature}
+        </h4>
+        <p>Time of recording: <b>{datastream.timestamp ? timeStr : 'no timeslot available'}</b></p>
+        <span>{datastream.showData === true ? 'humidity: ' + datastream.humidity : ''}</span>
+    </div>
+)
 
 }
 

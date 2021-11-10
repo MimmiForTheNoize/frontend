@@ -22,21 +22,28 @@ const AddData = ({ onAdd }) => {
     }
 
     return (
+        /*
+            id: input data
+                timestamp: make the data,
+                temperature: input data,
+                humidity: input data,
+                showData: make data
+         */
         <form className={'add-form'} onSubmit={onSubmit}>
             <div className={'form-control'}>
                 <label>Temperature*</label>
                 <input type='text' placeholder= 'Add your temperature' value={temperature} onChange={(e) =>
-                    setTemperature(e.target.value)}/>
+                setTemperature(e.target.value)}/>
             </div>
             <div className={'form-control'}>
                 <label>Humidity*</label>
                 <input type='text' placeholder= 'Add your humidity' value={humidity} onChange={(e) =>
-                    setHumidity(e.target.value)}/>
+                setHumidity(e.target.value)}/>
             </div>
 
             <div>
                 <input className={'waves-effect waves-light btn-large'} type='submit' value='Save Data' onClick={() =>
-                    timestamp = Date.now()}/>
+                timestamp = Date.now()}/>
             </div>
 
 
