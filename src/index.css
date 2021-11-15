@@ -1,13 +1,135 @@
-body {
+
+
+
+html, body {
+  height: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.wrapper_header {
+  margin-top: 10vh;
+}
+
+.datastream_div {
+  cursor: pointer;
+}
+
+.datastream_div.showData {
+  border-left: 5px solid purple;
+}
+
+deleteIcon {
+  color: darkred;
+  cursor: pointer;
+  display:flex;
+  flex-direction:row-reverse;
+}
+
+.container {
+  padding: 20px;
+  min-height: 100%;
+  margin-top: 5vh;
+}
+
+.MuiTableRow-root {
+  margin-top: 50px;
+}
+
+.footer,
+.push {
+  height: 200px;
+}
+
+.showMoreBtn {
+  margin-right: 2vw;
+}
+
+.timelineContainer {
+  margin-left: 5vw;
+}
+
+
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #E57373;
+  z-index: 9999;
+}
+
+.list {
+  list-style-type: none;
+  background-color: #E57373;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.items {
+  margin-right: 20px;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #f1f1f1;
+  cursor: pointer;
+}
+
+.homeMobile {
+  display: none;
+}
+
+.navIcon {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  padding: 5px;
+  color: #000;
+  font-size: 18px;
+}
+
+.MuiInput-underline {
+  border-bottom: none!important;
+}
+
+@media screen and (max-width: 950px) {
+  .homeMobile {
+    display: block;
+  }
+  .brand-logo {
+    display: none!important;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .list {
+    flex-direction: column;
+    height: auto;
+  }
+  #nav-mobile {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .items:nth-child(1) {
+    border-top: 1px solid #f1f1f1;
+    margin-top: 50px;
+  }
+
+  .items {
+    width: 100%;
+    border-top: 1px solid #f1f1f1;
+    margin-right: 0px;
+    padding: 20px 0;
+  }
+
+  .navIcon {
+    display: block;
+    cursor: pointer;
+    color: #f1f1f1;
+  }
 }

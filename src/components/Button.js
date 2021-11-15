@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 const Button = ({color, text, onClick}) => {
 
     return (
-        <div className='col s12'>
-            <button onClick={onClick} style={{
-                backgroundColor: color}} className={'waves-effect waves-light btn-large right'}>
-                {text}</button>
+    <div className='col s12'>
+        <button onClick={onClick} style={{
+            backgroundColor: color}} className={'waves-effect waves-light btn-large right'}>
+            {text}</button>
 
-        </div>
+    </div>
     )
 }
 

@@ -2,6 +2,8 @@
 
 ## Localhost setup
 + npm install @emotion/styled
++ npm i eslint --save
++  npm install -g LiveScript
 + yarn add @emotion/react
 + npm install @mui/material
 + npm i -g serve

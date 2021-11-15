@@ -4,8 +4,10 @@ import Data from "./Data";
 import * as React from "react";
 import {useEffect, useState} from "react";
 
-
 const Homepage = () => {
+
+
+
     const [showAddData, setShowAddData] = useState
     (false)
     const [data, setData] = useState([])
@@ -27,22 +29,15 @@ const Homepage = () => {
         return data
     }
 
-    //update data
-    const updateData = async  () => {
-        console.log("update");
-        const updateAll = await fetchData()
-        const res = await fetch('http://localhost:5000/data', {
-            method:'PUT',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        const updData = await res.json()
+    //fetching the datastream
+    const fetchDatastream = async (id) => {
+        //await cause fetch returns promise
+        const res = await fetch(`http://localhost:5000/data/${id}`)
+        const data = await res.json()
 
         return data
-
     }
+
 
     //Add Data
     const addData = async (datastream) => {
@@ -58,29 +53,47 @@ const Homepage = () => {
         const newData = await res.json()
         //add the new data
         setData([...data, newData])
-        /*
-                const id = Math.floor(Math.random() * 10000) +1
-                console.log(datastream);
-                const newData = {id, ...datastream }
-                setData([... data, newData])
-         */
-
     }
 
-    //delete Data
+    //delete Dat
     const  deleteData = async (id) => {
-        await fetch(`http://localhost:5000/data/${id}`, {method: 'DELETE'})
+        await fetch(`http://localhost:5000/data/${id}`,
+            {method: 'DELETE'})
         setData(data.filter((datastream) => datastream.id !== id))
 
     }
 
     //Toggle data
-    const toggleData = (id) => {
-        setData(data.map((datastream) =>
-                datastream.id === id ? {...datastream, showData : !datastream.showData} : datastream
+    const toggleData = async (id) => {
+
+
+            const dataToToggle = await fetchDatastream(id)
+            const updDatastream = { ...dataToToggle, showData : !dataToToggle.showData }
+
+            const res = await  fetch(`http://localhost:5000/data/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(updDatastream)
+            })
+            const data2 = await res.json();
+            setData(data.map((datastream) =>
+                    datastream.id === id ? {...datastream, showData: data2.showData} : datastream
+                )
             )
+
+
+        /*
+        setData(data.map((datastream) =>
+            datastream.id === id ? {...datastream, showData: !datastream.showData} : datastream
         )
-    }
+        )
+         */
+        }
+
+
+
     return (
         <div className="container">
 
@@ -89,11 +102,12 @@ const Homepage = () => {
                     showAdd={showAddData} />
             {showAddData && <AddData onAdd={addData} />}
             {data.length > 0 ?
-                <Data data={data} onDelete={deleteData}
-                      onToggle={toggleData} onUpdate={updateData()}/>
+                <Data data={data}   onDelete={deleteData}
+                    onToggle={toggleData} onUpdate={toggleData}/>
                 : <h3>'No Data available'</h3>}
         </div>
     )
 }
+
 
 export default Homepage
