@@ -4,24 +4,22 @@ const AddData = ({ onAdd }) => {
     const [temperature, setTemperature] = useState('')
     const [humidity, setHumidity] = useState('')
     const [sensorId, setSensorId] = useState('')
-    const showData = false;
-    let timestamp = '';
-    let id = Math.random().toString(36).slice(2);
 
-
-
+    //check if temperature, humidity and sensorId do match regex for float
     const onSubmit = (e) => {
         e.preventDefault()
 
         if(!temperature || !humidity || !sensorId ||
-            !temperature.match(/^(?!0\d)\d*(\.\d+)?$/) ||
+            !temperature.match(/^\-*(?!0\d)\d*(\.\d+)?$/) ||
             !humidity.match(/^(?!0\d)\d*(\.\d+)?$/)) {
             alert('Please add all the data! \n Temperature, Sensor ID and humidity are mandatory! \n ' +
                 'Keep in Mind: Only numbers are accepted.')
             return
         }
 
-        onAdd({ id, sensorId, timestamp, temperature, humidity, showData})
+
+        //id, showData and timestamp won´t be submitted
+        onAdd({sensorId, temperature, humidity})
         //clear the form
         setTemperature('')
         setHumidity('')
@@ -48,9 +46,7 @@ const AddData = ({ onAdd }) => {
             </div>
 
             <div>
-                <input className={'waves-effect waves-light btn-large'} type='submit' value='Save Data' onClick={() =>
-                    timestamp = Date.now()
-                }/>
+                <input className={'waves-effect waves-light btn-large saveData_btn'} type='submit' value='Save Data' />
             </div>
 
 

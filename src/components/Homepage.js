@@ -23,26 +23,28 @@ const Homepage = () => {
     //fetching the data
     const fetchData = async () => {
         //await cause fetch returns promise
-        const res = await fetch('http://localhost:5000/data')
+        const res = await fetch('http://localhost:9191/sensorrecords/findAllSensorrecords')
         const data = await res.json()
 
         return data
     }
 
-    //fetching the datastream
+
+        //fetching the datastream
     const fetchDatastream = async (id) => {
         //await cause fetch returns promise
-        const res = await fetch(`http://localhost:5000/data/${id}`)
+        const res = await fetch(`http://localhost:9191/sensorrecords/findSensorrecord/${id}`)
         const data = await res.json()
 
         return data
     }
+
 
 
     //Add Data
     const addData = async (datastream) => {
         //request response
-        const res = await fetch('http://localhost:5000/data', {
+        const res = await fetch('http://localhost:9191/sensorrecords/addSensorrecord', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -55,22 +57,22 @@ const Homepage = () => {
         setData([...data, newData])
     }
 
-    //delete Dat
+    //delete Data
     const  deleteData = async (id) => {
-        await fetch(`http://localhost:5000/data/${id}`,
+        await fetch(`http://localhost:9191/sensorrecords/deleteSensorrecord/${id}`,
             {method: 'DELETE'})
         setData(data.filter((datastream) => datastream.id !== id))
-
     }
 
     //Toggle data
     const toggleData = async (id) => {
 
 
-            const dataToToggle = await fetchDatastream(id)
-            const updDatastream = { ...dataToToggle, showData : !dataToToggle.showData }
 
-            const res = await  fetch(`http://localhost:5000/data/${id}`, {
+            const dataToToggle = await fetchDatastream(id)
+        const updDatastream = { ...dataToToggle, showData : !dataToToggle.showData }
+        //updateNewestSensorrecord
+            const res = await  fetch(`http://localhost:9191/sensorrecords/updateNewestSensorrecord/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json'
@@ -79,23 +81,15 @@ const Homepage = () => {
             })
             const data2 = await res.json();
             setData(data.map((datastream) =>
-                    datastream.id === id ? {...datastream, showData: data2.showData} : datastream
+                    datastream.sensorId === data2.sensorId ? {...datastream, showData: data2.showData} : datastream
                 )
             )
-
-
-        /*
-        setData(data.map((datastream) =>
-            datastream.id === id ? {...datastream, showData: !datastream.showData} : datastream
-        )
-        )
-         */
         }
 
 
 
     return (
-        <div className="container">
+        <div className="home_container">
 
             <Header onAdd={() =>setShowAddData
             (!showAddData)}

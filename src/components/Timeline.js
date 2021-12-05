@@ -15,7 +15,7 @@ import useFetch from "./useFetch";
 
 
 const Timeline = () => {
-    const BASE_URL = 'http://localhost:5000';
+    const BASE_URL = 'http://localhost:9191/sensorrecords/findAllSensorrecords';
     const {data, loading, error} = useFetch(BASE_URL);
 
 
@@ -32,20 +32,23 @@ const Timeline = () => {
                 <h3 >Timeline Temperature</h3>
                 <AreaChart
                     width={600}
-                    height={400}
+                    height={500}
                     data={data}
                     margin={{top: 10, right: 30, left: 0, bottom: 0 }}
                 >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
-                    <YAxis dataKey="temperature" />
+                    <YAxis dataKey="temperature"
+                    type="number"
+                    domain={[-50, 50]}
+                    />
 
                     <Tooltip />
                     <Area
                         type='monotone'
                         dataKey='temperature'
-                        stroke='#8884d8'
-                        fill='#8884d8'
+                        stroke='#156BB7'
+                        fill='#1e88e5'
                     />
 
                 </AreaChart>
@@ -55,7 +58,7 @@ const Timeline = () => {
                 <h3>Timeline Humidity</h3>
                 <AreaChart
                     width={600}
-                    height={400}
+                    height={500}
                     data={data}
                     margin={{top: 10, right: 30, left: 0, bottom: 0 }}
                 >
@@ -67,8 +70,8 @@ const Timeline = () => {
                     <Area
                         type='monotone'
                         dataKey='humidity'
-                        stroke='#8884d8'
-                        fill='#8884d8'
+                        stroke='#156BB7'
+                        fill='#1e88e5'
                     />
 
                 </AreaChart>

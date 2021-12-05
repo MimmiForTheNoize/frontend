@@ -6,7 +6,7 @@ const Header = ({ title, onAdd, showAdd, onUpdate }) => {
     return (
         <header>
      <div className={'wrapper_header'}>
-         <Button color={showAdd ? 'red' : 'lightgreen'} text={showAdd ? 'Close' : 'Add'} onClick={onAdd}/>
+         <Button color={showAdd ? '#d32f2f' : '#7b1fa2'} text={showAdd ? 'Close' : 'Add'} onClick={onAdd}/>
          <div>
              <h1 >{title}
              </h1>

@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 const Footer = () => {
     return (
-        <footer className={'red lighten-2'}>
+        <footer className={'cyan darken-4'}>
 
             <div className="container">
                 <div className="row">

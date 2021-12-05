@@ -8,7 +8,7 @@ import MaterialTable, {MTableCell} from 'material-table'
 
 
 
-    const url = 'http://localhost:5000/records';
+    const url = 'http://localhost:9191/sensorrecords/';
 
      const[data ,setData] = useState([])
 
@@ -17,11 +17,9 @@ import MaterialTable, {MTableCell} from 'material-table'
      }, [])
 
      const getData = () => {
-         fetch(url).then(resp => resp.json())
+         fetch(url + 'findAllSensorrecords').then(resp => resp.json())
              .then(resp => setData(resp))
      }
-
-
 
     const columns= [
         {
@@ -29,7 +27,7 @@ import MaterialTable, {MTableCell} from 'material-table'
             editable: "never"
         },
         {
-            title:'Sensor ID', field: 'sensor_id'
+            title:'Sensor ID', field: 'sensorId'
         },
         {
             title:'Timestamp', field: 'timestamp',
@@ -57,7 +55,7 @@ import MaterialTable, {MTableCell} from 'material-table'
 
            onRowAdd:(newData)=>new Promise((resolve,reject)=>{
                newData.showData = false;
-            fetch(url, {
+            fetch(url + 'addSensorrecord', {
                 method:'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -68,22 +66,14 @@ import MaterialTable, {MTableCell} from 'material-table'
                 resolve()
                 })
        }),
-           onRowDelete: (oldData) =>
-               new Promise((resolve,reject)=>{
-                   fetch(url + "/" + oldData.id, {
-                       method:'DELETE',
-                       headers: {
-                           'Content-type': 'application/json'
-                       },
-                   }).then(resp=>resp.json())
-                       .then(resp=>{getData()
-                           resolve()
-                       })
-               }),
+           onRowDelete: async (oldData) => {
+               await fetch(`http://localhost:9191/sensorrecords/deleteSensorrecord/${oldData.id}`,
+                   {method: 'DELETE'})
+           },
 
            onRowUpdate: (newData, oldData) =>
                new Promise((resolve,reject)=>{
-                   fetch(url + "/" + oldData.id, {
+                   fetch(url + "updateSensorrecord/" + oldData.id, {
                        method:'PUT',
                        headers: {
                            'Content-type': 'application/json'

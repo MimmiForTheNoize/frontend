@@ -51,11 +51,3 @@ const Navigation = () => {
 }
 
 export default Navigation
-
-/*
- <li><i className="large material-icons navicon">menu</i></li>
-.navicon {
-    font-size: 50px!important;
-    display: none!important;
-}
- */
