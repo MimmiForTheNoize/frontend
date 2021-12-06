@@ -81,7 +81,7 @@ const Homepage = () => {
             })
             const data2 = await res.json();
             setData(data.map((datastream) =>
-                    datastream.sensorId === data2.sensorId ? {...datastream, showData: data2.showData} : datastream
+                    datastream.sensorId === data2.sensorId ? {...datastream, showData: !datastream.showData} : datastream
                 )
             )
         }

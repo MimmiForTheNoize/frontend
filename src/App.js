@@ -5,7 +5,7 @@ import Homepage from "./components/Homepage";
 import About from './components/About'
 import * as React from 'react'
 import Navigation from "./components/Navigation";
-import {Table} from "./components/Table";
+
 import UseTable from "./components/UseTable";
 import Timeline from "./components/Timeline";
 

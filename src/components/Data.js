@@ -42,7 +42,7 @@ const  Data = ({ data, onDelete, onToggle, onUpdate }) => {
                }/>
                </div>
                {data.filter((val) => {
-                   if(searchTerm == "") {
+                   if(searchTerm === "") {
                        //returns everything
                         return val;
                    } else if(val.sensorId.toLowerCase().includes(searchTerm.toLowerCase())) {

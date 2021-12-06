@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import MaterialTable, {MTableCell} from 'material-table'
+import MaterialTable from 'material-table'
 
 
 

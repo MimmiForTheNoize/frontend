@@ -22,16 +22,13 @@ function reducer(state, { type, payload }) {
             return {...state, data:[], loading: true};
         case ACTIONS.FETCH_DATA:
             for(let item in payload) {
-                let date = new Date(parseInt(payload[item].timestamp));
-                let timeStr = date.getDate()+
-                    '/'+ date.getMonth()+
-                    '/'+date.getFullYear()+
-                    ' '+date.getHours()+
-                    ':'+ date.getMinutes() +
-                    ':'+date.getSeconds();
-                payload[item].timestamp = timeStr;
+                if(payload[item].date.includes("CET") === true) {
+                    let newTimeStr = payload[item].date;
+                    newTimeStr = newTimeStr.slice(4);
+                    newTimeStr = newTimeStr.slice(0, -9);
+                    payload[item].date = newTimeStr;
+                }
             }
-
             return {...state, data: payload, loading: false};
         case ACTIONS.ERROR:
             return {...state, data:[], error: payload };
