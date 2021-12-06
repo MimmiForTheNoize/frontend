@@ -21,6 +21,8 @@ import MaterialTable from 'material-table'
              .then(resp => setData(resp))
      }
 
+     let checkSaveData = true;
+
     const columns= [
         {
             title:'ID',field:'id',
@@ -55,6 +57,15 @@ import MaterialTable from 'material-table'
 
            onRowAdd:(newData)=>new Promise((resolve,reject)=>{
                newData.showData = false;
+               if(!newData.temperature || !newData.humidity || !newData.sensorId ||
+                   !newData.temperature.match(/^\-*(?!0\d)\d*(\.\d+)?$/) ||
+                   !newData.humidity.match(/^(?!0\d)\d*(\.\d+)?$/)) {
+                   alert('Please add all the data! \n Temperature, Sensor ID and humidity are mandatory! \n ' +
+                       'Keep in Mind: Only numbers are accepted.' + '\n ' +
+                       'Exept Sensor ID. Allows the value of the Sensor ID')
+                   checkSaveData = false;
+               }
+               if(checkSaveData === true) {
             fetch(url + 'addSensorrecord', {
                 method:'POST',
                 headers: {
@@ -65,24 +76,41 @@ import MaterialTable from 'material-table'
                 .then(resp=>{getData()
                 resolve()
                 })
-       }),
+           } else {
+                   reject()
+                   console.log("wrong data");
+               }
+           }),
            onRowDelete: async (oldData) => {
                await fetch(`http://localhost:9191/sensorrecords/deleteSensorrecord/${oldData.id}`,
                    {method: 'DELETE'})
+                   .then(resp=>{getData()})
            },
 
            onRowUpdate: (newData, oldData) =>
                new Promise((resolve,reject)=>{
-                   fetch(url + "updateSensorrecord/" + oldData.id, {
-                       method:'PUT',
-                       headers: {
-                           'Content-type': 'application/json'
-                       },
-                       body: JSON.stringify(newData)
-                   }).then(resp=>resp.json())
-                       .then(resp=>{getData()
-                           resolve()
-                       })
+                   if(!newData.temperature || !newData.humidity || !newData.sensorId ||
+                       !newData.temperature.match(/^\-*(?!0\d)\d*(\.\d+)?$/) ||
+                       !newData.humidity.match(/^(?!0\d)\d*(\.\d+)?$/)) {
+                       alert('Please add all the data! \n Temperature, Sensor ID and humidity are mandatory! \n ' +
+                           'Keep in Mind: Only numbers are accepted.' + '\n ' +
+                           'Exept Sensor ID. Allows the value of the Sensor ID')
+                       checkSaveData = false;
+                   }
+                   if(checkSaveData === true) {
+                       fetch(url + "updateSensorrecord/" + oldData.id, {
+                           method:'PUT',
+                           headers: {
+                               'Content-type': 'application/json'
+                           },
+                           body: JSON.stringify(newData)
+                       }).then(resp=>resp.json())
+                           .then(resp=>{getData()
+                               resolve()
+                           })
+                   } else {
+                       reject()
+                   }
                }),
        }}
            options={{

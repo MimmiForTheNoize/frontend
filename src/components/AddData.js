@@ -13,7 +13,8 @@ const AddData = ({ onAdd }) => {
             !temperature.match(/^\-*(?!0\d)\d*(\.\d+)?$/) ||
             !humidity.match(/^(?!0\d)\d*(\.\d+)?$/)) {
             alert('Please add all the data! \n Temperature, Sensor ID and humidity are mandatory! \n ' +
-                'Keep in Mind: Only numbers are accepted.')
+                'Keep in Mind: Only numbers are accepted.' + '\n ' +
+            'Exept Sensor ID. Allows the value of the Sensor ID')
             return
         }
 
